@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Auto Profile</title>
+</head>
+<body>
+    <section class="hero">
+        <img src="../static/img/background_desktop1.png" alt="Chevrolet Onix" id="hero-background">
+        <div class="container">
+            <header>
+                <h3>Auto Profile</h3>
+                <button class="btn-check" onclick="window.location.replace('http://127.0.0.1:5000/marcas');">CHECK NOW</button>
+            </header>
+            <div class="content">
+                <h1>Automotive</h1>
+                <h1>Profile</h1>
+                <div class="carrossel">
+                    <div class="carrossel-track">
+                  
+                      {% for marca in marcas %}
+                      <div class="grupo">
+                        <div class="marca">
+                          <img src="{{ url_for('static', filename='img/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
+                        </div>
+                      </div>
+                      {% endfor %}
+                  
+                      {% for marca in marcas %}
+                      <div class="grupo" aria-hidden="true">
+                        <div class="marca">
+                          <img src="{{ url_for('static', filename='img/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
+                        </div>
+                      </div>
+                      {% endfor %}
+                  
+                    </div>
+                  </div>  
+            </div>
+            <footer>
+                <h4 id="timestamp"></h4>
+                <div id="git">
+                    <img src="https://img.icons8.com/?size=18&id=62856&format=png&color=FFFFFF">
+                    <h4>GitHub</h4>
+                </div>
+            </footer>
+        </div>
+    </section>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

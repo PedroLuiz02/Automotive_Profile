@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/marcas.css">
+    <title>Auto Profile - Marcas</title>
+</head>
+<body>
+    <section class="hero">
+        <header>
+            <h2>Auto Profile</h2>
+        </header>
+        <div class="container">
+                {% for marca in marcas %}
+                <a href="http://127.0.0.1:5000/carros">
+                    <div class="cards">
+                        <div class="marca-card">
+                            <img src="{{ url_for('static', filename='img/' ~ marca.imagem) }}" alt="{{ marca.nome }}">
+    
+                            <h2>{{ marca.nome }}</h2>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+        </div>
+    </section>
+    <script src="../static/script.js"></script>
+</body>
+</html>

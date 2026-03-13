@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/carros.css">
+    <title>Auto Profile - Carros</title>
+</head>
+<body>
+    <section class="hero">
+        <header>
+            <h2>Auto Profile</h2>
+        </header>
+        <div class="container">
+                {% for carro in carros %}
+                <a href="">
+                    <div class="cards">
+                        <div class="carro-card">
+                            <img src="{{ url_for('static', filename='img/' ~ carro.imagem) }}" alt="{{ carro.nome }}">
+    
+                            <h2>{{ carro.nome }}</h2>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+        </div>
+    </section>
+    <script src="../static/script.js"></script>
+</body>
+</html>
