@@ -23,7 +23,7 @@
                       {% for marca in marcas %}
                       <div class="grupo">
                         <div class="marca">
-                          <img src="{{ url_for('static', filename='img/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
+                          <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
                         </div>
                       </div>
                       {% endfor %}
@@ -31,7 +31,7 @@
                       {% for marca in marcas %}
                       <div class="grupo" aria-hidden="true">
                         <div class="marca">
-                          <img src="{{ url_for('static', filename='img/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
+                          <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem_g) }}" alt="{{ marca.nome }}">
                         </div>
                       </div>
                       {% endfor %}

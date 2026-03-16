@@ -16,7 +16,7 @@
                 <a href="http://127.0.0.1:5000/carros">
                     <div class="cards">
                         <div class="marca-card">
-                            <img src="{{ url_for('static', filename='img/' ~ marca.imagem) }}" alt="{{ marca.nome }}">
+                            <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem) }}" alt="{{ marca.nome }}">
     
                             <h2>{{ marca.nome }}</h2>
                         </div>
@@ -25,6 +25,6 @@
                 {% endfor %}
         </div>
     </section>
-    <script src="../static/script.js"></script>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>
