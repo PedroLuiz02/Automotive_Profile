@@ -13,7 +13,7 @@
         </header>
         <div class="container">
                 {% for marca in marcas %}
-                <a href="http://127.0.0.1:5000/carros">
+                <a href="/carros">
                     <div class="cards">
                         <div class="marca-card">
                             <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem) }}" alt="{{ marca.nome }}">
