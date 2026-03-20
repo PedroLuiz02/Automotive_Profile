@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/marcas.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/marcas.css') }}">
     <title>Auto Profile - Marcas</title>
 </head>
 <body>
     <section class="hero">
         <header>
             <a href="/"><h2>Auto Profile</h2></a>
-            <a href="/"><img src="../static/img/back-arrow.png"></a>
+            <a href="/"><img src="{{ url_for('static', filename='img/back-arrow.png') }}"></a>
         </header>
         <div class="container">
                 {% for marca in marcas %}
@@ -26,6 +26,5 @@
                 {% endfor %}
         </div>
     </section>
-    <script src="../static/js/script.js"></script>
-</body>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </html>
