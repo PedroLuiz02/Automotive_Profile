@@ -88,7 +88,7 @@ def inserir_carro():
 #Exemplo na Prática: inserir_carros("Haval H6", "??????.00", "haval_h6.png", 1)
 @app.route("/inserir_modelo", methods=["GET", "POST"])
 def inserir_modelo():
-    inserir_modelos("Song Plus", "172.802.00", "song_plus.png", 2)
+    inserir_modelos("Song Pro", "189.990.00", "song_pro.png", 2)
     return "Modelo de Carro Inserido!"
 
 #inserir_carros("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>)
