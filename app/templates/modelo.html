@@ -10,10 +10,14 @@
     <section class="hero">
         {% for modelo in modelos %}
         <header>
-            <h2>{{ modelo["nome"] }}</h2>
-            <h2>{{ modelo["preco_medio"] }}</h2>
-            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo.nome }}">
+            <a href="/"><h2>Auto Profile</h2></a>
+            <a href="/carros"><img src="../static/img/back-arrow.png"></a>
         </header>
+        <div>
+            <h2>{{ modelo["nome"] }}</h2>
+            <h2>R$ {{ modelo["preco_medio"] }}</h2>
+            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo.nome }}">
+        </div>
         <div class="container">
         </div>
         {% endfor %}
