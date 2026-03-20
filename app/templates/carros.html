@@ -9,20 +9,50 @@
 <body>
     <section class="hero">
         <header>
-            <h2>Auto Profile</h2>
+            <a href="/"><h2>Auto Profile</h2></a>
+            <a href="/marcas"><img src="../static/img/back-arrow.png"></a>
         </header>
-        <div class="container">
-                {% for carro in carros %}
-                <a href="">
-                    <div class="cards">
-                        <div class="carro-card">
-                            <img src="{{ url_for('static', filename='img/carros/' ~ carro.imagem) }}" alt="{{ carro.nome }}">
-    
-                            <h2>{{ carro.nome }}</h2>
-                        </div>
+        
+        <div class="marcas" >
+            {% for marca in marcas %}
+            <div class="marca"  data-id="{{ marca.id }}">
+                <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem) }}" alt="{{ marca.nome }}">
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="container" id="lista_carros">
+            {% for carro in carros %}
+
+            <div class="open-modal" data-modal="modal-{{ carro.id }}" id="card-btn">
+                <div class="cards">
+                    <div class="carro-card">
+                        <img src="{{ url_for('static', filename='img/carros/' ~ carro.imagem) }}" alt="{{ carro.nome }}">
+
+                        <h2>{{ carro.nome }}</h2>
                     </div>
-                </a>
-                {% endfor %}
+                </div>
+            </div>
+
+            <dialog class="modal" id="modal-{{ carro.id }}">
+                <button class="close-modal" data-modal="modal-{{ carro.id }}">
+                    <img src="../static/img/close.png">
+                </button>
+                <div class="models-content">
+                    {% for modelo in modelos_por_carro[carro["id"]] %}
+                    <div class="models-cards">
+                        <a href="{{ url_for('carros_por_modelo', id=modelo['id']) }}" class="model-card">
+                            <img src="{{ url_for('static', filename='img/carros/' ~ modelo.imagem) }}" alt="{{ modelo.nome }}">
+            
+                            <h2>{{ modelo["nome"] }}</h2>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </dialog>
+
+            {% endfor %}
         </div>
     </section>
     <script src="../static/js/script.js"></script>

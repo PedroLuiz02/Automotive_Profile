@@ -18,7 +18,7 @@
                 <h1>Automotive</h1>
                 <h1>Profile</h1>
                 <div class="carrossel">
-                    <div class="carrossel-track">
+                    <div class="carrossel-track" onclick="window.location.replace('/marcas');">
                   
                       {% for marca in marcas %}
                       <div class="grupo">
@@ -41,13 +41,13 @@
             </div>
             <footer>
                 <h4 id="timestamp"></h4>
-                <div id="git">
+                <div id="git" onclick="window.open('https://github.com/PedroLuiz02/Automotive_Profile', '_blank');">
                     <img src="https://img.icons8.com/?size=18&id=62856&format=png&color=FFFFFF">
                     <h4>GitHub</h4>
                 </div>
             </footer>
         </div>
     </section>
-    <script src="../static/js/script.js"></script>
+    <script src="../static/js/timestamp.js"></script>
 </body>
 </html>

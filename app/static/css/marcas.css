@@ -12,6 +12,31 @@ body{
     background: #DEDDDB;
 }
 
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a{
+    color: inherit;
+    text-decoration: none;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+}
+
+header a:hover{
+    transform: scale(1.04);
+}
+
+header img{
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+}
+
 .hero header{
     padding: 24px 14px;
     margin-bottom: 2.5rem;

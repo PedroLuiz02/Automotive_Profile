@@ -1,0 +1,30 @@
+{% for carro in carros %}
+
+<div class="open-modal" data-modal="modal-{{ carro.id }}">
+    <div class="cards">
+        <div class="carro-card">
+            <img src="{{ url_for('static', filename='img/carros/' ~ carro.imagem) }}" alt="{{ carro.nome }}">
+            <h2>{{ carro.nome }}</h2>
+        </div>
+    </div>
+</div>
+
+<dialog class="modal" id="modal-{{ carro.id }}">
+    <button class="close-modal" data-modal="modal-{{ carro.id }}">
+        <img src="../static/img/close.png">
+    </button>
+    <div class="models-content">
+        {% for modelo in modelos_por_carro[carro["id"]] %}
+        <div class="models-cards">
+            <a href="{{ url_for('carros_por_modelo', id=modelo['id']) }}" class="model-card">
+                <img src="{{ url_for('static', filename='img/carros/' ~ modelo.imagem) }}" alt="{{ modelo.nome }}">
+
+                <h2>{{ modelo["nome"] }}</h2>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</dialog>
+
+{% endfor %}

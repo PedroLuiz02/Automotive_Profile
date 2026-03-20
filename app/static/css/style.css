@@ -94,6 +94,7 @@ header{
     width: max-content;
     animation: spin 20s linear infinite;
     will-change: transform;
+    cursor: pointer;
 }
 
 .grupo{
@@ -141,6 +142,7 @@ footer{
     flex-direction: row;
     align-items: center;
     justify-content: end;
+    cursor: pointer;
 }
 
 @media (max-width: 992px) {

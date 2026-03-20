@@ -1,7 +1,7 @@
 import sqlite3
 from .database import conectar
 
-# CRIAR TABELAS
+# Criar Tabelas
 def criar_tabelas():
     conn = conectar()
     cursor = conn.cursor()
@@ -57,7 +57,7 @@ def criar_tabelas():
     conn.commit()
     conn.close()
 
-# INSERIR DADOS
+# Inserir Dados
 def inserir_marcas(nome, imagem, imagem_g):
     conn = conectar()
     cursor = conn.cursor()
@@ -107,7 +107,7 @@ def inserir_fichas(ano, tipo_motor, descricao_motor, autonomia, potencia, porte,
     conn.commit()
     conn.close()
 
-# LISTAR DADOS
+# Listar Dados
 def listar_carros():
     conn = conectar()
     cursor = conn.cursor()
@@ -123,7 +123,47 @@ def listar_carros():
     conn.close()
     return dados
 
-# DELETAR
+# Listar Carros por Marca
+def listar_carro_por_marca(marca_id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT carros.id, carros.nome, marcas.nome
+    FROM carros
+    JOIN marcas ON carros.marca_id = marcas.id
+    WHERE marca_id = ?
+    """, (marca_id,))
+
+    dados = cursor.fetchall()
+    conn.close()
+
+    return dados
+
+# Listar Modelos por Carro
+def listar_modelos_por_carro(carro_id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT modelos.id, modelos.nome, modelos.imagem
+    FROM modelos
+    JOIN carros ON modelos.carro_id = carros.id
+    WHERE carro_id = ?
+    """, (carro_id,))
+
+    dados = cursor.fetchall()
+    conn.close()
+
+    return dados
+
+# Listar Ficha por Modelo
+
+# Listar Manual por Modelo
+
+# Listar Manutenções por Modelo
+
+# Deletar
 def deletar_carro(id):
     conn = conectar()
     cursor = conn.cursor()
