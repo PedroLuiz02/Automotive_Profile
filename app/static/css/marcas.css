@@ -42,6 +42,30 @@ header img{
     margin-bottom: 2.5rem;
 }
 
+.btn-back{
+    font-weight: 800;
+    background-color: #C8C6C6;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.btn-back img{
+    width: 15px;
+    height: auto;
+    padding-right: 3px;
+}
+
+.btn-back:hover{
+    transform: scale(1.04);
+}
+
 .container{
     display: flex;
     flex-wrap: wrap;

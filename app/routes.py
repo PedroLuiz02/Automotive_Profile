@@ -20,9 +20,19 @@ def marcas():
 
 @app.route("/carros")
 def carros():
+    marca_id = request.args.get("marca_id", type=int)
+
     conn = conectar()
     marcas = conn.execute('SELECT * FROM marcas').fetchall()
     carros = conn.execute('SELECT * FROM carros').fetchall()
+
+    if marca_id:
+        carros = conn.execute(
+            "SELECT * FROM carros WHERE marca_id = ?",
+            (marca_id,)
+        ).fetchall()
+    else:
+        carros = conn.execute("SELECT * FROM carros").fetchall()
     conn.close()
 
     modelos_por_carro = {}
@@ -30,7 +40,7 @@ def carros():
     for carro in carros:
         modelos_por_carro[carro["id"]] = listar_modelos_por_carro(carro["id"])
 
-    return render_template("carros.html", carros=carros, marcas=marcas, modelos_por_carro = modelos_por_carro)
+    return render_template("carros.html", carros=carros, marcas=marcas, modelos_por_carro = modelos_por_carro, marca_ativa=marca_id)
 
 @app.route("/api/carros")
 def api_carros():
@@ -64,6 +74,27 @@ def carros_por_modelo(id):
     modelos = conn.execute('SELECT * FROM modelos WHERE id = ?', (id,)).fetchall()
     conn.close()
     return render_template("modelo.html", modelos=modelos)
+
+@app.route("/api/modelo/<int:id>/<tipo>")
+def abas_modelo(id,tipo):
+    conn = conectar()
+
+    modelos = conn.execute('SELECT * FROM modelos WHERE id = ?', (id,)).fetchall()
+
+    conn.close()
+
+    if tipo == "geral":
+        return render_template("partials/_geral.html", modelos = modelos) 
+    
+    elif tipo == "ficha":
+        conn = conectar()
+        fichas = conn.execute('SELECT * FROM fichas').fetchall()
+        conn.close()
+
+        return render_template("partials/_ficha.html", modelos = modelos, fichas = fichas)
+    
+    elif tipo == "avaliacao":
+        return render_template("partials/_avaliacao.html", modelos = modelos)
 
 @app.route("/criar_tabelas")
 def criar_tabela():

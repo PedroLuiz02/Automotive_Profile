@@ -12,6 +12,13 @@ body{
     background: #E8EAE6;
 }
 
+.hero{
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 header{
     display: flex;
     flex-direction: row;
@@ -37,6 +44,83 @@ header img{
     cursor: pointer;
 }
 
+.btn-back{
+    font-weight: 800;
+    background-color: #C8C6C6;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.btn-back img{
+    width: 15px;
+    height: auto;
+    padding-right: 3px;
+}
+
+.btn-back:hover{
+    transform: scale(1.04);
+}
+
 .hero header{
     padding: 24px 14px;
+}
+
+.container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 110px;
+    overflow: hidden;
+}
+
+.car-title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+#nome-carro{
+    font-size: 6vw;
+}
+
+#preco-medio{
+    font-size: 2vw;
+}
+
+.car-img{
+    max-width: 90%;
+    max-height: 60vh;
+    object-fit: contain;
+    margin-bottom: 20px;
+    padding-right: 300px;
+}
+
+footer{
+    display: flex;
+    margin-top: auto;
+}
+
+.swap-btn{
+    width: 640px;
+    height: 60px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.swap-btn:hover{
+    text-decoration: underline;
+}
+
+.ativo{
+    background-color: #C8C6C6;
 }

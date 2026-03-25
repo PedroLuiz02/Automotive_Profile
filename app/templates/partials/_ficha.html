@@ -1,0 +1,40 @@
+<h2>Olá</h2>
+{% for ficha in fichas %}
+    {% for modelo in modelos %}
+    <div class="table-content">
+        <button class="btn-left" onclick=""><img src="../static/img/seta-esquerda.png" alt="Seta Esquerda"></button>
+        <table>
+            <tr>
+              <td>Ano</td>
+              <td>2020</td>
+            </tr>
+            <tr>
+              <td>Motor</td>
+              <td>??</td>
+            </tr>
+          </table>
+          <button class="btn-right" onclick=""><img src="../static/img/seta-direita.png" alt="Seta Direita"></button>
+    </div>
+    <div class="panel">
+        <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}">
+        <button><img>Manual</button>
+        <button class="open-modal" data-modal="modal-{{ ficha.id }}"><img>Manutenções</button>
+    </div>
+
+    <dialog class="modal" id="modal-{{ carro.id }}">
+        <button class="close-modal" data-modal="modal-{{ carro.id }}">
+            <img src="{{ url_for('static', filename='img/close.png') }}">
+        </button>
+        <div class="maintenance-content">
+            {% for modelo in modelos_por_carro[carro["id"]] %}
+            <div class="maintenance-cards">
+                <a href="{{ url_for('carros_por_modelo', id=modelo['id']) }}" class="model-card">
+                    <img src="{{ url_for('static', filename='img/carros/' ~ modelo.imagem) }}" alt="{{ modelo.nome }}">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </dialog>
+    {% endfor %}
+{% endfor %}

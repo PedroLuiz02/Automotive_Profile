@@ -10,11 +10,11 @@
     <section class="hero">
         <header>
             <a href="/"><h2>Auto Profile</h2></a>
-            <a href="/"><img src="../static/img/back-arrow.png"></a>
+            <button class="btn-back" onclick="window.location.replace('/');"><img src="../static/img/seta-esquerda.png" alt="Seta Esquerda">Back</button>
         </header>
         <div class="container">
                 {% for marca in marcas %}
-                <a href="/carros">
+                <a href="/carros?marca_id={{ marca.id }}">
                     <div class="cards">
                         <div class="marca-card">
                             <img src="{{ url_for('static', filename='img/logos/' ~ marca.imagem) }}" alt="{{ marca.nome }}">

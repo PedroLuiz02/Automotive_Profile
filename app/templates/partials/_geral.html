@@ -1,0 +1,7 @@
+{% for modelo in modelos %}
+    <div class="car-title">
+        <h2 id="nome-carro">{{ modelo["nome"] }}</h2>
+        <h2 id="preco-medio">R$ {{ modelo["preco_medio"] }}</h2>
+    </div>
+    <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}" class="car-img">
+{% endfor %}

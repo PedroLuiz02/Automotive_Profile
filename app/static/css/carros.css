@@ -41,6 +41,30 @@ header img{
     padding: 24px 14px;
 }
 
+.btn-back{
+    font-weight: 800;
+    background-color: #C8C6C6;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.btn-back img{
+    width: 15px;
+    height: auto;
+    padding-right: 3px;
+}
+
+.btn-back:hover{
+    transform: scale(1.04);
+}
+
 .marcas{
     display: flex;
     align-items: center;
@@ -65,6 +89,12 @@ header img{
     transition-property: transform;
     transition-duration: 0.35s;
     transition-timing-function: ease-in-out;
+    opacity: 0.4;
+}
+
+.marca_ativa img{
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .container{

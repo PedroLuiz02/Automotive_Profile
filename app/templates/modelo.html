@@ -8,18 +8,23 @@
 </head>
 <body>
     <section class="hero">
-        {% for modelo in modelos %}
         <header>
             <a href="/"><h2>Auto Profile</h2></a>
-            <a href="/carros"><img src="../static/img/back-arrow.png"></a>
+            <button class="btn-back" onclick="window.location.replace('/carros');"><img src="../static/img/seta-esquerda.png" alt="Seta Esquerda">Back</button>
         </header>
-        <div>
-            <h2>{{ modelo["nome"] }}</h2>
-            <h2>R$ {{ modelo["preco_medio"] }}</h2>
-            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo.nome }}">
+        {% for modelo in modelos %}
+        <div class="container" id="model-content">
+            <div class="car-title">
+                <h2 id="nome-carro">{{ modelo["nome"] }}</h2>
+                <h2 id="preco-medio">R$ {{ modelo["preco_medio"] }}</h2>
+            </div>
+            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}" class="car-img">
         </div>
-        <div class="container">
-        </div>
+        <footer>
+            <button class="swap-btn ativo" data-tipo="geral" data-id="{{ modelo.id }}">Visão Geral</button>
+            <button class="swap-btn" data-tipo="ficha" data-id="{{ modelo.id }}">Ficha Técnica</button>
+            <button class="swap-btn" data-tipo="avaliacao" data-id="{{ modelo.id }}">Avaliações</button>
+        </footer>
         {% endfor %}
     </section>
     <script src="../static/js/script.js"></script>
