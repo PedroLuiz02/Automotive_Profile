@@ -39,18 +39,26 @@ def criar_tabelas():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS fichas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ano TEXT NULL,
-    tipo_motor TEXT NOT NULL,
-    descricao_motor TEXT NULL,
-    autonomia TEXT NULL,
-    potencia TEXT NULL,
-    porte TEXT NULL,
-    dimensoes TEXT NULL,
-    lugares TEXT NULL,
-    cambio TEXT NULL,
-    velocidade_maxima TEXT NULL,
+    ano TEXT,
+    autonomia TEXT,
+    potencia TEXT,
+    porte TEXT,
+    dimensoes TEXT,
+    lugares TEXT,
+    cambio TEXT,
+    velocidade_maxima TEXT,
     modelo_id INTEGER,
-    FOREIGN KEY (modelo_id) REFERENCES modelos(id)
+    motor_id INTEGER,
+    FOREIGN KEY (modelo_id) REFERENCES modelos(id),
+    FOREIGN KEY (motor_id) REFERENCES motores(id)
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS motores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tipo_motor TEXT NOT NULL,
+    desc_motor TEXT
     )
     """)
 

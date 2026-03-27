@@ -88,10 +88,20 @@ def abas_modelo(id,tipo):
     
     elif tipo == "ficha":
         conn = conectar()
-        fichas = conn.execute('SELECT * FROM fichas').fetchall()
+        print("ID RECEBIDO:", id)
+
+        fichas = conn.execute("""
+        SELECT f.*, m.tipo_motor, m.desc_motor
+        FROM fichas f
+        LEFT JOIN motores m ON f.motor_id = m.id
+        WHERE f.modelo_id = ?
+        """, (id,)).fetchall()
+
+        print("FICHAS:", fichas)  # 👈 TESTE
+
         conn.close()
 
-        return render_template("partials/_ficha.html", modelos = modelos, fichas = fichas)
+        return render_template("partials/_ficha.html", modelos=modelos, fichas=fichas)
     
     elif tipo == "avaliacao":
         return render_template("partials/_avaliacao.html", modelos = modelos)
@@ -101,30 +111,85 @@ def criar_tabela():
     criar_tabelas()
     return "Tabelas Criadas!"
 
-#inserir_marcas("Nome da Marca", "Nome da Marca Padrão.png", "Nome da Marca Cinza.png")
-#Exemplo na Prática: inserir_marcas("GWM", "gwm_logo.png", "gwm_logo_g.png")
+# inserir_marcas("Nome da Marca", "Nome da Marca Padrão.png", "Nome da Marca Cinza.png")
+# Exemplo na Prática: inserir_marcas("GWM", "gwm_logo.png", "gwm_logo_g.png")
 @app.route("/inserir_marca", methods=["GET", "POST"])
 def inserir_marca():
     inserir_marcas("BYD", "byd_logo.png", "byd_logo_g.png")
     return "Marca Inserida!"
 
-#inserir_carros("Nome do carro", "Nome do carro.png", <id da marca>)
-#Exemplo na Prática: inserir_carros("Haval", "haval.png", 1)
+# inserir_carros("Nome do carro", "Nome do carro.png", <id da marca>)
+# Exemplo na Prática: inserir_carros("Haval", "haval.png", 1)
 @app.route("/inserir_carro", methods=["GET", "POST"])
 def inserir_carro():
     inserir_carros("Song", "song.png", 1)
     return "Carro Inserido!"
 
-#inserir_carros("Nome do modelo", "<preço médio>", "Nome do modelo.png", <id do carro>)
-#Exemplo na Prática: inserir_carros("Haval H6", "??????.00", "haval_h6.png", 1)
+# inserir_carros("Nome do modelo", "<preço médio>", "Nome do modelo.png", <id do carro>)
+# Exemplo na Prática: inserir_carros("Haval H6", "??????.00", "haval_h6.png", 1)
 @app.route("/inserir_modelo", methods=["GET", "POST"])
 def inserir_modelo():
-    inserir_modelos("Song Pro", "189.990.00", "song_pro.png", 2)
+    inserir_modelos("Song Plus Premium", "299.800.00", "song_plus_premium.png", 2)
     return "Modelo de Carro Inserido!"
 
-#inserir_carros("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>)
-#Exemplo na Prática: inserir_carros("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>)
-@app.route("/inserir_fichas", methods=["GET", "POST"])
+# inserir_fichas("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>)
+# Exemplo na Prática: inserir_fichas("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>, <id motor>)
+@app.route("/inserir_ficha", methods=["POST"])
 def inserir_ficha():
-    inserir_fichas("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", 1)
-    return "Modelo de Carro Inserido!"
+    conn = conectar()
+
+    tipo_motor = request.form["tipo_motor"]
+    desc_motor = request.form["desc_motor"]
+
+    ano = request.form["ano"]
+    autonomia = request.form["autonomia"]
+    potencia = request.form["potencia"]
+    porte = request.form["porte"]
+    dimensoes = request.form["dimensoes"]
+    lugares = request.form["lugares"]
+    cambio = request.form["cambio"]
+    velocidade_maxima = request.form["velocidade_maxima"]
+    modelo_id = request.form["modelo_id"]
+
+    motor = conn.execute("SELECT id FROM motores WHERE tipo_motor = ?", (tipo_motor,)).fetchone()
+
+# inserir motor caso ele não exista
+    if motor is None:
+        conn.execute("INSERT INTO motores (tipo_motor, desc_motor) VALUES (?, ?)", (tipo_motor, desc_motor))
+
+        motor_id = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+    else:
+        motor_id = motor["id"]
+
+# inserir ficha
+    conn.execute("""
+    INSERT INTO fichas (
+    ano, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id, motor_id) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (ano, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id, motor_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/carros")
+
+@app.route("/aba_ficha/<int:modelo_id>")
+def aba_ficha(modelo_id):
+    conn = conectar()
+
+    fichas = conn.execute("""
+    SELECT f.*, m.tipo_motor, m.desc_motor
+    FROM fichas f
+    JOIN motores m ON f.motor_id = m.id
+    WHERE f.modelo_id = ?
+    """, (modelo_id,)).fetchall()
+
+    modelo = conn.execute("SELECT * FROM modelos WHERE id = ?", (modelo_id,)).fetchone()
+
+    conn.close()
+
+    return render_template("partials/_ficha.html", fichas=fichas, modelo = modelo)
+
+# Abrir Formulário de Ficha de Modelo Específico
+@app.route("/admin/ficha/<int:modelo_id>")
+def form_ficha(modelo_id):
+    return render_template("ficha_form.html", modelo_id=modelo_id)

@@ -124,3 +124,60 @@ footer{
 .ativo{
     background-color: #C8C6C6;
 }
+
+.ficha-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.conteudo-tabela {
+    text-align: center;
+    min-width: 250px;
+}
+
+.seta {
+    width: 30px;
+    cursor: pointer;
+}
+
+.esquerda {
+    margin-right: 10px;
+}
+
+.direita {
+    margin-left: 10px;
+}
+
+.pagina-indicador {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: #222;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.info-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.info-icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}

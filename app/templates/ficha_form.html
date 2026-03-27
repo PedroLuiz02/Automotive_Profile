@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A. Profile - Ficha Form</title>
+</head>
+<body>
+    <form action="/inserir_ficha" method="POST">
+
+        <input type="hidden" name="modelo_id" value="{{ modelo_id }}">
+    
+        <input name="tipo_motor" placeholder="Tipo do motor">
+        <input name="desc_motor" placeholder="Descrição do motor">
+    
+        <input name="ano" placeholder="Ano">
+        <input name="autonomia" placeholder="Autonomia">
+        <input name="potencia" placeholder="Potência">
+        <input name="porte" placeholder="Porte">
+        <input name="dimensoes" placeholder="Dimensões">
+        <input name="lugares" placeholder="Lugares">
+        <input name="cambio" placeholder="Câmbio">
+        <input name="velocidade_maxima" placeholder="Velocidade máxima">
+        <input type="hidden" name="modelo_id" value="{{ modelo_id }}">
+    
+        <button type="submit" onclick="window.location.replace('/carros');">Salvar ficha</button>
+    
+    </form>
+</body>
+</html>

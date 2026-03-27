@@ -53,11 +53,11 @@ dimensoes TEXT NULL,
 lugares TEXT NULL,
 cambio TEXT NULL,
 velocidade_maxima TEXT NULL,
+manual TEXT,
 modelo_id INTEGER,
 FOREIGN KEY (modelo_id) REFERENCES modelos(id)
 )
 """)
-
 
 conn.commit()
 conn.close()

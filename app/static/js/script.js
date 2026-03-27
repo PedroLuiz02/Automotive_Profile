@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ativarCloseModal();
 
     let marcaAtual = null;
+
+    let marcaSelecionada = document.querySelector(".marca_ativa");
+    if (marcaSelecionada) {
+    marcaAtual = marcaSelecionada.dataset.id;
+    }
     
     // Ajax de Troca de Marcas
     function trocar_marca(id){
@@ -112,10 +117,50 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('model-content').innerHTML = this.responseText;
             ativarOpenModal();
             ativarCloseModal();
+            tabelaAtual = 0;
+            mostrarTabela();
+            atualizarUI();
         };
 
         xhttp.open("GET", "/api/modelo/" + id + "/" + tipo);
 
         xhttp.send();
     };
+
+    // Controle de Tabelas - Fichas
+    let tabelaAtual = 0;
+    const tabelas = ["tabela1", "tabela2"];
+
+    function mostrarTabela() {
+        tabelas.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = "none";
+        });
+    
+        const atual = document.getElementById(tabelas[tabelaAtual]);
+        if (atual) atual.style.display = "block";
+    }
+    
+    window.mudarTabela = function(direcao) {
+        tabelaAtual += direcao;
+    
+        if (tabelaAtual < 0) tabelaAtual = 0;
+        if (tabelaAtual >= tabelas.length) tabelaAtual = tabelas.length - 1;
+    
+        tabelas.forEach(id => {
+            document.getElementById(id).style.display = "none";
+        });
+    
+        document.getElementById(tabelas[tabelaAtual]).style.display = "block";
+    
+        atualizarUI();
+    }
+    
+    function atualizarUI() {
+        document.getElementById("pagina").innerText = `${tabelaAtual + 1} / ${tabelas.length}`;
+    
+        document.getElementById("seta-esq").style.display = tabelaAtual === 0 ? "none" : "block";
+        document.getElementById("seta-dir").style.display = tabelaAtual === tabelas.length - 1 ? "none" : "block";
+    }
+
 });
