@@ -125,7 +125,14 @@ footer{
     background-color: #C8C6C6;
 }
 
-.ficha-container {
+.ficha-content {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+
+.ficha-itens {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,4 +187,54 @@ footer{
 .info-icon:hover .tooltip {
     opacity: 1;
     visibility: visible;
+}
+
+.panel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panel img{
+    width: 100%;
+    max-height: 40vh;
+    object-fit: contain;
+    margin-bottom: 40px;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.btn-panel{
+    width: 300px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 2px solid #C8C6C6;
+    background: inherit;
+    cursor: pointer;
+    font-weight: 900;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.3s ease;
+}
+
+.btn-panel span{
+    text-align: center;
+    width: 100%;
+}
+
+.btn-panel img{
+    width: 20px;
+    height: 20px;
+}
+
+.btn-panel:hover{
+    transform: scale(1.03);
 }

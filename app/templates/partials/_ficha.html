@@ -1,73 +1,82 @@
-<div class="ficha-container">
+<div class="ficha-content">
 
-    <img id="seta-esq"
-         src="{{ url_for('static', filename='img/seta-esquerda.png') }}"
-         class="seta esquerda"
-         onclick="mudarTabela(-1)">
-
-    <!-- tabelas -->
-    <div class="conteudo-tabela">
-
-        <div id="tabela1" class="tabela">
-            {% for ficha in fichas %}
-            <div class="info-bloco">
-                <p>
-                    <strong>Motor:</strong> 
-                    {{ ficha.tipo_motor }} 
-                    <span class="info-icon">
-                        <img src="{{ url_for('static', filename='img/info.png') }}" width="14">
-                        <span class="tooltip">{{ ficha.desc_motor }}</span>
-                    </span>
-                </p>
-                <p><strong>Ano:</strong> {{ ficha.ano }}</p>
-                <p><strong>Potência:</strong> {{ ficha.potencia }}</p>
-                <p><strong>Autonomia:</strong> {{ ficha.autonomia }}</p>
-                <p><strong>Câmbio:</strong> {{ ficha.cambio }}</p>
+    <div class="ficha-itens">
+    
+        <img id="seta-esq"
+             src="{{ url_for('static', filename='img/seta-esquerda.png') }}"
+             class="seta esquerda"
+             onclick="mudarTabela(-1)">
+    
+        <div class="conteudo-tabela">
+    
+            <div id="tabela1" class="tabela">
+                {% for ficha in fichas %}
+                <div class="info-bloco">
+                    <p>
+                        <strong>Motor:</strong> 
+                        {{ ficha.tipo_motor }} 
+                        <span class="info-icon">
+                            <img src="{{ url_for('static', filename='img/info.png') }}" width="14">
+                            <span class="tooltip">{{ ficha.desc_motor }}</span>
+                        </span>
+                    </p>
+                    <p><strong>Ano:</strong> {{ ficha.ano }}</p>
+                    <p><strong>Potência:</strong> {{ ficha.potencia }}</p>
+                    <p><strong>Autonomia:</strong> {{ ficha.autonomia }}</p>
+                    <p><strong>Câmbio:</strong> {{ ficha.cambio }}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-
-        <div id="tabela2" class="tabela" style="display:none;">
-            {% for ficha in fichas %}
-            <div class="info-bloco">
-                <p><strong>Porte:</strong> {{ ficha.porte }}</p>
-                <p><strong>Dimensões:</strong> {{ ficha.dimensoes }}</p>
-                <p><strong>Lugares:</strong> {{ ficha.lugares }}</p>
-                <p><strong>Velocidade:</strong> {{ ficha.velocidade_maxima }}</p>
+    
+            <div id="tabela2" class="tabela" style="display:none;">
+                {% for ficha in fichas %}
+                <div class="info-bloco">
+                    <p><strong>Porte:</strong> {{ ficha.porte }}</p>
+                    <p><strong>Dimensões:</strong> {{ ficha.dimensoes }}</p>
+                    <p><strong>Lugares:</strong> {{ ficha.lugares }}</p>
+                    <p><strong>Velocidade:</strong> {{ ficha.velocidade_maxima }}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+    
+            <div id="pagina" class="pagina-indicador"></div>
         </div>
-
-        <div id="pagina" class="pagina-indicador"></div>
-
+    
+        <img id="seta-dir"
+             src="{{ url_for('static', filename='img/seta-direita.png') }}"
+             class="seta direita"
+             onclick="mudarTabela(1)">
+    
     </div>
-
-    <img id="seta-dir"
-         src="{{ url_for('static', filename='img/seta-direita.png') }}"
-         class="seta direita"
-         onclick="mudarTabela(1)">
-
+    
+        {% for ficha in fichas %}
+    
+        <div class="panel">
+            {% for modelo in modelos %}
+            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}">
+            {% endfor %} 
+            <div class="btns">
+                <button class="btn-panel">
+                    <img src="{{ url_for('static', filename='img/download.png') }}">
+                    <span>Download do Manual</span>
+                </button>
+            
+                <button class="btn-panel open-modal" data-modal="modal-{{ ficha.id }}">
+                    <img src="{{ url_for('static', filename='img/maintenance.png') }}">
+                    <span>Manutenções</span>
+                </button>
+            </div>
+        </div>
+        
+        <dialog class="modal" id="modal-{{ ficha.id }}">
+            <button class="close-modal" data-modal="modal-{{ ficha.id }}">
+                Fechar
+            </button>
+        
+            <div class="maintenance-content">
+                Conteúdo aqui
+            </div>
+        </dialog>
+        
+        {% endfor %}
 </div>
-
-    {% for ficha in fichas %}
-
-    <div class="panel">
-        {% if modelo %}
-        <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}">
-        {% endif %} 
-        <button class="open-modal" data-modal="modal-{{ ficha.id }}">
-            Manutenções
-        </button>
-    </div>
-    
-    <dialog class="modal" id="modal-{{ ficha.id }}">
-        <button class="close-modal" data-modal="modal-{{ ficha.id }}">
-            Fechar
-        </button>
-    
-        <div class="maintenance-content">
-            Conteúdo aqui
-        </div>
-    </dialog>
-    
-    {% endfor %}
