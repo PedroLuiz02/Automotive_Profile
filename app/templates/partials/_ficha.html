@@ -1,52 +1,59 @@
 <div class="ficha-content">
 
     <div class="ficha-itens">
-    
-        <img id="seta-esq"
-             src="{{ url_for('static', filename='img/seta-esquerda.png') }}"
-             class="seta esquerda"
-             onclick="mudarTabela(-1)">
-    
-        <div class="conteudo-tabela">
-    
+
             <div id="tabela1" class="tabela">
                 {% for ficha in fichas %}
                 <div class="info-bloco">
-                    <p>
-                        <strong>Motor:</strong> 
-                        {{ ficha.tipo_motor }} 
-                        <span class="info-icon">
-                            <img src="{{ url_for('static', filename='img/info.png') }}" width="14">
-                            <span class="tooltip">{{ ficha.desc_motor }}</span>
-                        </span>
-                    </p>
-                    <p><strong>Ano:</strong> {{ ficha.ano }}</p>
-                    <p><strong>Potência:</strong> {{ ficha.potencia }}</p>
-                    <p><strong>Autonomia:</strong> {{ ficha.autonomia }}</p>
-                    <p><strong>Câmbio:</strong> {{ ficha.cambio }}</p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Motor</td>
+                                <td>{{ ficha.tipo_motor }}
+                                    <span class="info-icon">
+                                        <img src="{{ url_for('static', filename='img/info.png') }}" width="14">
+                                        <span class="tooltip"> {{ ficha.desc_motor }}</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ano</td>
+                                <td>{{ ficha.ano }}</td>
+                            </tr>
+                            <tr>
+                                <td>Potência</td>
+                                <td>{{ ficha.potencia }}</td>
+                            </tr>
+                            <tr>
+                                <td>Autonomia</td>
+                                <td>{{ ficha.autonomia }}</td>
+                            </tr>
+                            <tr>
+                                <td>Câmbio</td>
+                                <td>{{ ficha.cambio }}</td>
+                            </tr>
+                            <tr>
+                                <td>Porte</td>
+                                <td>{{ ficha.porte }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dimensões</td>
+                                <td>{{ ficha.dimensoes }}</td>
+                            </tr>
+                            <tr>
+                                <td>Lugares</td>
+                                <td>{{ ficha.lugares }}</td>
+                            </tr>
+                            <tr>
+                                <td>Velocidade</td>
+                                <td>{{ ficha.velocidade_maxima }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 {% endfor %}
             </div>
-    
-            <div id="tabela2" class="tabela" style="display:none;">
-                {% for ficha in fichas %}
-                <div class="info-bloco">
-                    <p><strong>Porte:</strong> {{ ficha.porte }}</p>
-                    <p><strong>Dimensões:</strong> {{ ficha.dimensoes }}</p>
-                    <p><strong>Lugares:</strong> {{ ficha.lugares }}</p>
-                    <p><strong>Velocidade:</strong> {{ ficha.velocidade_maxima }}</p>
-                </div>
-                {% endfor %}
-            </div>
-    
-            <div id="pagina" class="pagina-indicador"></div>
-        </div>
-    
-        <img id="seta-dir"
-             src="{{ url_for('static', filename='img/seta-direita.png') }}"
-             class="seta direita"
-             onclick="mudarTabela(1)">
-    
+
     </div>
     
         {% for ficha in fichas %}
