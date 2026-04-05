@@ -27,10 +27,7 @@ def carros():
     carros = conn.execute('SELECT * FROM carros').fetchall()
 
     if marca_id:
-        carros = conn.execute(
-            "SELECT * FROM carros WHERE marca_id = ?",
-            (marca_id,)
-        ).fetchall()
+        carros = conn.execute("SELECT * FROM carros WHERE marca_id = ?",(marca_id,)).fetchall()
     else:
         carros = conn.execute("SELECT * FROM carros").fetchall()
     conn.close()
@@ -88,7 +85,6 @@ def abas_modelo(id,tipo):
     
     elif tipo == "ficha":
         conn = conectar()
-        print("ID RECEBIDO:", id)
 
         fichas = conn.execute("""
         SELECT f.*, m.tipo_motor, m.desc_motor
@@ -97,14 +93,21 @@ def abas_modelo(id,tipo):
         WHERE f.modelo_id = ?
         """, (id,)).fetchall()
 
-        print("FICHAS:", fichas)  # 👈 TESTE
-
         conn.close()
 
         return render_template("partials/_ficha.html", modelos=modelos, fichas=fichas)
     
     elif tipo == "avaliacao":
-        return render_template("partials/_avaliacao.html", modelos = modelos)
+        conn = conectar()
+
+        avaliacoes = conn.execute("""
+        SELECT * FROM avaliacoes
+        WHERE modelo_id = ?
+        """, (id,)).fetchall()
+
+        conn.close()
+    
+        return render_template("partials/_avaliacao.html", modelos = modelos, avaliacoes = avaliacoes)
 
 @app.route("/criar_tabelas")
 def criar_tabela():
@@ -132,8 +135,6 @@ def inserir_modelo():
     inserir_modelos("Song Plus Premium", "299.800.00", "song_plus_premium.png", 2)
     return "Modelo de Carro Inserido!"
 
-# inserir_fichas("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>)
-# Exemplo na Prática: inserir_fichas("ano", "tipo_motor", "descricao_motor", "autonomia", "potencia", "porte", "dimensoes", "lugares", "cambio", "velocidade_maxima", <id do modelo>, <id motor>)
 @app.route("/inserir_ficha", methods=["POST"])
 def inserir_ficha():
     conn = conectar()
@@ -153,7 +154,7 @@ def inserir_ficha():
 
     motor = conn.execute("SELECT id FROM motores WHERE tipo_motor = ?", (tipo_motor,)).fetchone()
 
-# inserir motor caso ele não exista
+    # inserir motor caso ele não exista
     if motor is None:
         conn.execute("INSERT INTO motores (tipo_motor, desc_motor) VALUES (?, ?)", (tipo_motor, desc_motor))
 
@@ -161,11 +162,11 @@ def inserir_ficha():
     else:
         motor_id = motor["id"]
 
-# inserir ficha
+    # inserir ficha
     conn.execute("""
     INSERT INTO fichas (
     ano, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id, motor_id) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (ano, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id, motor_id))
+    VALUES (?, ?, ?, ?)""", (ano, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id, motor_id))
 
     conn.commit()
     conn.close()
@@ -193,3 +194,38 @@ def aba_ficha(modelo_id):
 @app.route("/admin/ficha/<int:modelo_id>")
 def form_ficha(modelo_id):
     return render_template("ficha_form.html", modelo_id=modelo_id)
+
+@app.route("/inserir_avaliacao", methods=["POST"])
+def inserir_avaliacao():
+    conn = conectar()
+
+    user = request.form["user"]
+    mensagem = request.form["mensagem"]
+    nota = request.form["nota"]
+    modelo_id = request.form["modelo_id"]
+
+    # inserir ficha
+    conn.execute("""
+    INSERT INTO avaliacoes (user, mensagem, nota, modelo_id) VALUES (?, ?, ?, ?)""", 
+    (user, mensagem, nota, modelo_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/carros")
+
+# Abrir Formulário de Avaliação
+@app.route("/admin/avaliacao/<int:modelo_id>")
+def form_avaliacao(modelo_id):
+
+    conn = conectar()
+    modelos = conn.execute("""
+    SELECT modelos.*, carros.nome AS carro_nome, marcas.nome AS marca_nome
+    FROM modelos
+    JOIN carros ON modelos.carro_id = carros.id 
+    JOIN marcas ON carros.marca_id = marcas.id
+    WHERE modelos.id = ?""", (modelo_id,)).fetchone()
+    conn.commit()
+    conn.close()
+
+    return render_template("aval_form.html", modelo_id=modelo_id, modelos = modelos)

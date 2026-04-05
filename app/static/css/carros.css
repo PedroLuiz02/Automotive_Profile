@@ -141,6 +141,7 @@ header img{
     width: 1400px;
     height: 700px;
     margin: auto auto;
+    border-radius: 16px;
 }
 
 .close-modal{

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A. Profile - Aval. Form</title>
+</head>
+<body>
+    <div class="car-title">
+        <h2 id="nome-carro">Marca:<span> {{ modelos["marca_nome"] }}</span></h2>
+        <h2 id="nome-carro">Carro:<span> {{ modelos["carro_nome"] }}</span></h2>
+        <h2 id="nome-modelo">Modelo do Carro:<span> {{ modelos["nome"] }}</span></h2>
+        <h2 id="id-modelo">Id do Carro:<span> {{ modelos["id"] }}</span></h2>
+        <img src="{{ url_for('static', filename='img/carros/' ~ modelos['imagem']) }}" width="450" alt="{{ modelos['nome'] }}" class="car-img">
+    </div>
+
+    <form action="/inserir_avaliacao" method="POST">
+
+        <input type="hidden" name="modelo_id" value="{{ modelo_id }}">
+        <input name="user" placeholder="Nome do Usuário">
+        <input name="mensagem" placeholder="Mensagem">
+        <input name="nota" placeholder="Nota">
+    
+        <button type="submit">Salvar Avaliação</button>
+        <button type="button" onclick="window.location.replace('/carros');">Retornar Para Carros</button>
+    
+    </form>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<div class="aval-content">
+
+    <div class="aval-itens">
+
+            <div id="tabela-estrelas" class="tabela-estrelas">
+                <div class="info-bloco">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Estrelas</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Estrelas</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Estrelas</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Estrelas</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Estrelas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="aval-panel">
+                <select name="Estrelas" id="stars">
+                    <option value="1-star">1 Estrela ★☆☆☆☆</option>
+                    <option value="2-star">2 Estrelas ★★☆☆☆</option>
+                    <option value="3-star">3 Estrelas ★★★☆☆</option>
+                    <option value="4-star">4 Estrelas ★★★★☆</option>
+                    <option value="5-star">5 Estrelas ★★★★★</option>
+                </select>
+
+                {% for avaliacao in avaliacoes %}
+                <div class="aval-cards">
+                    <div id="aval-header">
+                        <img src="{{ url_for('static', filename='img/perfil.png') }}">
+                        <h2>{{ avaliacao["user"] }}</h2>
+                    </div>
+
+                    <p>{{ avaliacao["mensagem"] }}</p>
+
+                    <div class="estrelas" data-nota="{{ avaliacao.nota }}">
+                        {% for i in range(1, 6) %}
+                        {% if i <= avaliacao["nota"] %}
+                            <span class="estrela cheia">★</span>
+                        {% else %}
+                            <span class="estrela vazia">☆</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                    
+
+                <div class="pagination">
+                    <button class="pagination-card">
+                        1
+                    </button>
+
+                    <button class="pagination-card">
+                        2
+                    </button>
+                </div>
+            </div>
+    </div>
+
+</div>

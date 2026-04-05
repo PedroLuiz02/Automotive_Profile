@@ -31,6 +31,7 @@ def criar_tabelas():
     nome TEXT NOT NULL,
     imagem TEXT NOT NULL,
     preco_medio TEXT NOT NULL,
+    manual TEXT NULL,
     carro_id INTEGER,
     FOREIGN KEY (carro_id) REFERENCES carros(id)
     )
@@ -59,6 +60,17 @@ def criar_tabelas():
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tipo_motor TEXT NOT NULL,
     desc_motor TEXT
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS avaliacoes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user TEXT NOT NULL,
+    mensagem TEXT NOT NULL,
+    nota INTEGER NOT NULL CHECK(nota >= 1 AND nota <= 5),
+    modelo_id INTEGER,
+    FOREIGN KEY (modelo_id) REFERENCES modelos(id)
     )
     """)
 
@@ -110,6 +122,18 @@ def inserir_fichas(ano, tipo_motor, descricao_motor, autonomia, potencia, porte,
     cursor.execute(
         "INSERT INTO fichas (ano, tipo_motor, descricao_motor, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (ano, tipo_motor, descricao_motor, autonomia, potencia, porte, dimensoes, lugares, cambio, velocidade_maxima, modelo_id)
+    )
+
+    conn.commit()
+    conn.close()
+
+def inserir_avaliacoes(user, mensagem, nota, modelo_id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO fichas (user, mensagem, nota, modelo_id) VALUES (?, ?, ?, ?)",
+        (user, mensagem, nota, modelo_id)
     )
 
     conn.commit()

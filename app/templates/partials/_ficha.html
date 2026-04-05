@@ -11,7 +11,7 @@
                                 <td>Motor</td>
                                 <td>{{ ficha.tipo_motor }}
                                     <span class="info-icon">
-                                        <img src="{{ url_for('static', filename='img/info.png') }}" width="14">
+                                        <img src="{{ url_for('static', filename='img/info.png') }}" width="18">
                                         <span class="tooltip"> {{ ficha.desc_motor }}</span>
                                     </span>
                                 </td>
@@ -60,29 +60,52 @@
     
         <div class="panel">
             {% for modelo in modelos %}
-            <img src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}">
-            {% endfor %} 
+            <img id="modelo-img" src="{{ url_for('static', filename='img/carros/' ~ modelo['imagem']) }}" alt="{{ modelo['nome'] }}">
             <div class="btns">
-                <button class="btn-panel">
+                <a class="btn-panel" href="{{ url_for('static', filename='manuais/' ~ modelo['manual']) }}" download>
                     <img src="{{ url_for('static', filename='img/download.png') }}">
-                    <span>Download do Manual</span>
-                </button>
-            
+                    Download do Manual
+                </a>
+                
                 <button class="btn-panel open-modal" data-modal="modal-{{ ficha.id }}">
                     <img src="{{ url_for('static', filename='img/maintenance.png') }}">
-                    <span>Manutenções</span>
+                    Manutenções
                 </button>
             </div>
+            {% endfor %} 
         </div>
         
         <dialog class="modal" id="modal-{{ ficha.id }}">
             <button class="close-modal" data-modal="modal-{{ ficha.id }}">
-                Fechar
+                <img src="{{ url_for('static', filename='img/close.png') }}">
             </button>
         
             <div class="maintenance-content">
-                Conteúdo aqui
+                <div class="maintenance-cards">
+                    <button class="maintenance-card">
+                        <img src="">
+        
+                        <h2>Motor</h2>
+                    </button>
+                </div>
+                
+                <div class="maintenance-cards">
+                    <button class="maintenance-card">
+                        <img src="">
+        
+                        <h2>Motor</h2>
+                    </button>
+                </div>
+
+                <div class="maintenance-cards">
+                    <button class="maintenance-card">
+                        <img src="">
+        
+                        <h2>Motor</h2>
+                    </button>
+                </div>
             </div>
+
         </dialog>
         
         {% endfor %}

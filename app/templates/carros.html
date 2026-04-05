@@ -38,6 +38,7 @@
                 <button class="close-modal" data-modal="modal-{{ carro.id }}">
                     <img src="{{ url_for('static', filename='img/close.png') }}">
                 </button>
+                
                 <div class="models-content">
                     {% for modelo in modelos_por_carro[carro["id"]] %}
                     <div class="models-cards">
