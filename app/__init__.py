@@ -1,18 +1,10 @@
 from flask import Flask
-import sqlite3
 import os
 from .database import conectar
 
 app = Flask(__name__)
 
 os.makedirs("instance", exist_ok=True)
-
-DATABASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'instance', 'database.db')
-
-def get_db():
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
 
 # criar as tabelas quando iniciar
 conn = conectar()
