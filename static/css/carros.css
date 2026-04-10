@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Montserrat", sans-serif;
+    color: #121212;
+    background: #DEDDDB;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a{
+    color: inherit;
+    text-decoration: none;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+}
+
+header a:hover{
+    transform: scale(1.04);
+}
+
+header img{
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+}
+
+.hero header{
+    padding: 24px 14px;
+}
+
+.btn-back{
+    font-weight: 800;
+    background-color: #C8C6C6;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.btn-back img{
+    width: 15px;
+    height: auto;
+    padding-right: 3px;
+}
+
+.btn-back:hover{
+    transform: scale(1.04);
+}
+
+.marcas{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    padding-right: 1em;
+    flex-wrap: wrap;
+}
+
+.marca{
+    flex: 0 0 4.5em;
+    height: 3em;
+    padding: 0 0.5em;
+    font-size: 3rem;
+    border-radius: .2em;
+    text-align: center;
+    align-content: center;
+}
+
+.marca img{
+    height: 160px;
+    width: 220px;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+    opacity: 0.4;
+}
+
+.marca_ativa img{
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 50px;
+    gap: 3rem;
+}
+
+.container a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.cards{
+    background-color: #E8EAE6;
+    width: 240px;
+    height: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    border-radius: 28px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+}
+
+.cards:hover{
+    transform: scale(1.05);
+}
+
+.carro-card img{
+    height: 140px;
+    margin-bottom: 10px;
+}
+
+.modal{
+    background-color: #E8EAE6;
+    width: 1400px;
+    height: 700px;
+    margin: auto auto;
+    border-radius: 16px;
+}
+
+.close-modal{
+    margin: 12px 0px 50px 12px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+}
+
+.close-modal:hover{
+    transform: scale(1.02);
+}
+
+.close-modal img{
+    width: 30px;
+    height: auto;
+}
+
+.models-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 50px;
+    gap: 2rem;
+}
+
+.models-cards{
+    background-color: #E8EAE6;
+    width: 240px;
+    height: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    border-radius: 28px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+}
+
+.models-cards:hover{
+    transform: scale(1.05);
+}
+
+.model-card{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.model-card img{
+    width: 200px;
+    height: 300;
+}
