@@ -2,7 +2,10 @@ from flask import Flask
 import os
 from .database import conectar
 
-app = Flask(__name__)
+app = Flask(__name__,
+static_folder='app/static',
+static_url_path='/static',
+template_folder='app/templates')
 
 os.makedirs("instance", exist_ok=True)
 
