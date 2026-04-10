@@ -9,7 +9,12 @@
     <form action="/inserir_ficha" method="POST">
 
         <input type="hidden" name="modelo_id" value="{{ modelo_id }}">
-    
+        
+        <select name="tipo_motor" placeholder="Tipo do motor">
+            {% for motores in motores %}
+            <option value="{{ motores_tipo_motor }}"></option>
+            {% endfor %}
+        </select>
         <input name="tipo_motor" placeholder="Tipo do motor">
         <input name="desc_motor" placeholder="Descrição do motor">
     

@@ -3,6 +3,7 @@ from .database import conectar
 import sqlite3
 from flask import render_template, jsonify, request, redirect, url_for, flash
 from .models import criar_tabelas, inserir_marcas, inserir_carros, inserir_modelos, inserir_fichas, listar_modelos_por_carro
+from collections import Counter
 
 @app.route("/")
 def index():
@@ -105,9 +106,12 @@ def abas_modelo(id,tipo):
         WHERE modelo_id = ?
         """, (id,)).fetchall()
 
+        notas = [a["nota"] for a in avaliacoes]
+        contagem = Counter(notas)
+
         conn.close()
     
-        return render_template("partials/_avaliacao.html", modelos = modelos, avaliacoes = avaliacoes)
+        return render_template("partials/_avaliacao.html", modelos = modelos, avaliacoes = avaliacoes, contagem = contagem)
 
 @app.route("/criar_tabelas")
 def criar_tabela():
@@ -193,7 +197,17 @@ def aba_ficha(modelo_id):
 # Abrir Formulário de Ficha de Modelo Específico
 @app.route("/admin/ficha/<int:modelo_id>")
 def form_ficha(modelo_id):
-    return render_template("ficha_form.html", modelo_id=modelo_id)
+
+    conn = conectar()
+
+    motores = conn.execute("""
+    SELECT * FROM motores
+    """).fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return render_template("ficha_form.html", modelo_id=modelo_id, motores = motores)
 
 @app.route("/inserir_avaliacao", methods=["POST"])
 def inserir_avaliacao():
