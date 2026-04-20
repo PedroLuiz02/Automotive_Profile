@@ -154,6 +154,64 @@ footer{
 }
 
 @media (max-width: 768px) {
+    .container {
+      height: auto;
+      min-height: 100vh;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .content {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .content h1 {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+        margin: 0 0 20px 0;
+        line-height: 1.1;
+    }
+
+    .container::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+    }
+
+    .carrossel {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .marca img {
+        height: 150px;
+        width: auto;
+    }
+
+    header {
+        align-items: center;
+    }
+    
+    header span {
+        font-size: 14px;
+    }
+    
+    .btn-check {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 12px;
+    }
+
+    #hero-background {
+        object-position: center right;
+        opacity: 0.92;
+    }
 }
 
 @media (max-width: 576px) {

@@ -78,7 +78,7 @@ header img{
     text-decoration: none;
 }
 
-.cards{
+.card{
     background-color: #E8EAE6;
     width: 300px;
     height: 352px;
@@ -94,11 +94,63 @@ header img{
     transition-timing-function: ease-in-out;
 }
 
-.cards:hover{
+.card:hover{
     transform: scale(1.05);
 }
 
 .marca-card img{
     height: 250px;
     margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    body {
+      line-height: 1.4;
+    }
+  
+    .hero header {
+      padding: 16px;
+      margin-bottom: 1.5rem;
+    }
+  
+    header img {
+      width: 28px;
+    }
+  
+    .btn-back {
+      padding: 5px 14px;
+      font-size: 12px;
+    }
+  
+    .container {
+      padding: 0 20px;
+    }
+  
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 100%;
+    }
+  
+    .cards a {
+      width: 100%;
+    }
+  
+    .card {
+      width: 100%;
+      height: auto;
+      padding: 15px;
+      border-radius: 20px;
+    }
+  
+    .marca-card img {
+      height: 120px;
+      width: auto;
+      margin-bottom: 10px;
+    }
+  
+    .marca-card h2 {
+      font-size: 14px;
+    }
 }

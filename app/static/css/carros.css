@@ -210,3 +210,97 @@ header img{
     width: 200px;
     height: 300;
 }
+
+@media (max-width: 768px) {
+    body {
+      line-height: 1.4;
+    }
+  
+    .hero header {
+      padding: 16px;
+    }
+  
+    header img {
+      width: 28px;
+    }
+  
+    .btn-back {
+      padding: 5px 14px;
+      font-size: 12px;
+    }
+  
+    .marcas {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 10px 20px;
+    }
+  
+    .marcas::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .marca {
+      flex: 0 0 auto;
+    }
+  
+    .marca img {
+      height: 120px;
+      width: auto;
+      opacity: 0.6;
+    }
+  
+    .marca_ativa img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  
+    .container {
+      padding: 0 20px;
+    }
+  
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  
+    .cards {
+      width: 100%;
+      height: auto;
+      padding: 15px;
+      border-radius: 20px;
+    }
+  
+    .carro-card img {
+      height: 100px;
+      width: auto;
+      margin-bottom: 10px;
+    }
+  
+    .modal {
+      width: 100%;
+      height: 70%;
+      border-radius: 6px;
+      border: none;
+    }
+  
+    .models-content {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  
+    .models-cards {
+      width: 100%;
+      height: auto;
+      padding: 15px;
+    }
+  
+    .model-card img {
+      width: 100%;
+      height: auto;
+    }
+}

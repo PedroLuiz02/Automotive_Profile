@@ -569,3 +569,188 @@ table, td {
         margin-bottom: 50px;
     }
 }
+
+@media (max-width: 768px) {
+
+    body {
+      line-height: 1.4;
+    }
+  
+    .hero {
+      height: auto;
+      min-height: 100vh;
+    }
+  
+    .hero header {
+      padding: 16px;
+    }
+  
+    header img {
+      width: 28px;
+    }
+  
+    .btn-back {
+      padding: 5px 14px;
+      font-size: 12px;
+    }
+  
+    .container {
+      padding: 20px;
+      justify-content: center;
+    }
+  
+    .car-title {
+      align-items: flex-end;
+      text-align: right;
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
+  
+    #nome-carro {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+  
+    #preco-medio {
+      font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+  
+    .car-img {
+      max-height: 28vh;
+      margin-bottom: 20px;
+    }
+  
+    footer {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .swap-btn {
+      width: 100%;
+      height: 48px;
+      font-size: 15px;
+    }
+  
+    .ficha-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+  
+    .ficha-itens {
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+  
+    .conteudo-tabela {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    .tabela {
+      font-size: 11px;
+    }
+  
+    .tabela td {
+      padding: 5px;
+    }
+  
+    .panel {
+      width: 100%;
+    }
+  
+    #modelo-img {
+      max-height: 28vh;
+      margin-bottom: 15px;
+    }
+  
+    .btns {
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+  
+    .btn-panel {
+      width: 100%;
+      height: 36px;
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .modal {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+    }
+  
+    .maintenance-content {
+      padding: 15px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+  
+    .maintenance-cards {
+      width: 100%;
+      height: auto;
+      padding: 12px;
+    }
+  
+    .maintenance-card img {
+      width: 100%;
+      height: auto;
+    }
+  
+    .aval-itens {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .star {
+      margin: 0;
+      padding: 8px;
+      justify-content: center;
+    }
+  
+    .star img {
+      width: 22px;
+    }
+  
+    .star h2 {
+      margin-left: 6px;
+      font-size: 0.85rem;
+    }
+  
+    .aval-content {
+      width: 100%;
+    }
+  
+    .aval-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+  
+    .aval-card {
+      width: 100%;
+      height: auto;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 18px;
+    }
+  
+    .pagination {
+      flex-wrap: wrap;
+    }
+  
+    .pagination-card {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+  
+    .tooltip {
+      display: none;
+    }
+}
