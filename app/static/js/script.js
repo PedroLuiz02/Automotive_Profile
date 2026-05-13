@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ativarOpenModal();
             ativarCloseModal();
             tabelaAtual = 0;
+            ativarStars();
             mostrarTabela();
             atualizarUI();
         };
@@ -161,6 +162,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
         document.getElementById("seta-esq").style.display = tabelaAtual === 0 ? "none" : "block";
         document.getElementById("seta-dir").style.display = tabelaAtual === tabelas.length - 1 ? "none" : "block";
+    }
+
+    // Acordeon Estrelas
+    function ativarStars() {
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+    
+                const ativo_star = star.classList.contains('ativo-star');
+    
+                stars.forEach(item => {
+                    item.classList.remove('ativo-star');
+                });
+    
+                if (!ativo_star) {
+                    star.classList.add('ativo-star');
+                }
+            });
+        });
     }
 
 });

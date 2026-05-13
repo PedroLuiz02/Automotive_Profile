@@ -12,6 +12,11 @@ body{
     background: #E8EAE6;
 }
 
+.quebra {
+    width: 100%;
+    height: 0;
+}
+
 .hero{
     max-width: 100%;
     height: 100vh;
@@ -362,7 +367,7 @@ table, td {
     flex-direction: row;
     gap: 2.5rem;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 #aval-header{
@@ -379,9 +384,8 @@ table, td {
     margin-right: 10px;
 }
 
-
 .aval-card{
-    background-color: #E8EAE6;
+    background-color: #f0f0f0;
     width: 280px;
     height: 220px;
     display: flex;
@@ -403,27 +407,71 @@ table, td {
     transform: scale(1.002);
 }
 
+.tabela-estrelas{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 300px;
+}
+
 .star{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #C8C6C6;
+    padding: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+    width: 100%;
+}
+
+.star.ativo-star .quant_aval{
+    max-height: 60px;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.star:hover{
+    background-color: #d1d1d1;
+}
+
+.star.ativo-star{
+    background-color: #bdbbbb;
+}
+
+.star-header{
+    display: flex;
     align-items: center;
-    flex-shrink: 0;
-    background-color: #ffffff;
-    padding: 1rem;
-    border-style: solid;
-    border-color: black;
-    border-width: 2px 3px 2px 3px; 
-    margin-right: 14rem;
+    gap: 12px;
+}
+
+.star-header h1{
+    font-size: 2.2rem;
 }
 
 .star h2{
-    margin-left: 30px;
+    margin-top: 5px;
 }
 
-.star img{
-    width: 50px;
+.stars-icon{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.stars-icon img{
+    width: 26px;
     height: auto;
-    gap: 4px;
+    pointer-events: none;
+}
+
+.quant_aval{
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+    max-height .3s ease, opacity .3s ease, margin-top .3s ease;
 }
 
 .pagination{
@@ -435,7 +483,7 @@ table, td {
 }
 
 .pagination-card{
-    background-color: #E8EAE6;
+    background-color: #f0f0f0;
     width: 50px;
     height: 50px;
     display: flex;
@@ -572,185 +620,165 @@ table, td {
 
 @media (max-width: 768px) {
 
-    body {
-      line-height: 1.4;
+    body{
+        overflow-x: hidden;
     }
-  
-    .hero {
-      height: auto;
-      min-height: 100vh;
+
+    .hero{
+        min-height: 100vh;
     }
-  
-    .hero header {
-      padding: 16px;
+
+    .container{
+        padding: 16px;
+        justify-content: flex-start;
     }
-  
-    header img {
-      width: 28px;
+
+    .hero header{
+        padding: 14px;
     }
-  
-    .btn-back {
-      padding: 5px 14px;
-      font-size: 12px;
+
+    #nome-carro{
+        font-size: 2rem;
     }
-  
-    .container {
-      padding: 20px;
-      justify-content: center;
+
+    #preco-medio{
+        font-size: 1rem;
     }
-  
-    .car-title {
-      align-items: flex-end;
-      text-align: right;
-      margin-top: 10px;
-      margin-bottom: 40px;
+
+    .car-title{
+        margin-bottom: 20px;
     }
-  
-    #nome-carro {
-      font-size: clamp(1.8rem, 8vw, 2.5rem);
+
+    .car-img{
+        max-height: 240px;
     }
-  
-    #preco-medio {
-      font-size: clamp(0.9rem, 4vw, 1.2rem);
+
+    .btns{
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
     }
-  
-    .car-img {
-      max-height: 28vh;
-      margin-bottom: 20px;
+
+    .btn-panel{
+        width: 100%;
+        font-size: 14px;
     }
-  
-    footer {
-      flex-direction: column;
-      gap: 10px;
+
+    .aval-content{
+        width: 100%;
+        padding-bottom: 20px;
     }
-  
-    .swap-btn {
-      width: 100%;
-      height: 48px;
-      font-size: 15px;
+
+    .aval-itens{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.2rem;
+        width: 100%;
     }
-  
-    .ficha-content {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+
+    .tabela-estrelas{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 10px;
+        width: 120px;
     }
-  
-    .ficha-itens {
-      flex-direction: column;
-      gap: 6px;
-      flex: 1;
+
+    .star{
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+        border-radius: 10px;
     }
-  
-    .conteudo-tabela {
-      min-width: 0;
-      width: 100%;
+
+    .star-header{
+        justify-content: space-between;
+        width: 100%;
     }
-  
-    .tabela {
-      font-size: 11px;
+
+    .star-header h1{
+        font-size: 1.8rem;
     }
-  
-    .tabela td {
-      padding: 5px;
+
+    .stars-icon img{
+        width: 20px;
     }
-  
-    .panel {
-      width: 100%;
+
+    .quant_aval{
+        font-size: 14px;
     }
-  
-    #modelo-img {
-      max-height: 28vh;
-      margin-bottom: 15px;
+
+    .aval-panel{
+        width: 100%;
+        gap: 1rem;
     }
-  
-    .btns {
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 10px;
+
+    .aval-cards{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
     }
-  
-    .btn-panel {
-      width: 100%;
-      height: 36px;
-      font-size: 12px;
-      padding: 6px;
+
+    .aval-card{
+        width: 100%;
+        min-height: 170px;
+        height: auto;
+        border-radius: 18px;
+        padding: 14px;
+        font-size: 13px;
     }
-  
-    .modal {
-      width: 100%;
-      height: auto;
-      border-radius: 0;
+
+    #aval-header{
+        font-size: 11px;
     }
-  
-    .maintenance-content {
-      padding: 15px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.8rem;
+
+    #aval-header img{
+        width: 32px;
+        margin-right: 8px;
     }
-  
-    .maintenance-cards {
-      width: 100%;
-      height: auto;
-      padding: 12px;
+
+    .estrelas{
+        font-size: 14px;
     }
-  
-    .maintenance-card img {
-      width: 100%;
-      height: auto;
+
+    .pagination{
+        margin-top: 5px;
     }
-  
-    .aval-itens {
-      flex-direction: column;
-      gap: 10px;
+
+    .pagination-card{
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
     }
-  
-    .star {
-      margin: 0;
-      padding: 8px;
-      justify-content: center;
+
+    footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
     }
-  
-    .star img {
-      width: 22px;
+
+    .swap-btn{
+        width: 100%;
+        height: 55px;
+        font-size: 15px;
     }
-  
-    .star h2 {
-      margin-left: 6px;
-      font-size: 0.85rem;
+
+    .modal{
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
     }
-  
-    .aval-content {
-      width: 100%;
+
+    .maintenance-content{
+        grid-template-columns: 1fr;
+        padding: 20px;
     }
-  
-    .aval-cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.6rem;
-    }
-  
-    .aval-card {
-      width: 100%;
-      height: auto;
-      font-size: 12px;
-      padding: 10px;
-      border-radius: 18px;
-    }
-  
-    .pagination {
-      flex-wrap: wrap;
-    }
-  
-    .pagination-card {
-      width: 36px;
-      height: 36px;
-      font-size: 14px;
-    }
-  
-    .tooltip {
-      display: none;
+
+    .maintenance-cards{
+        width: 100%;
     }
 }

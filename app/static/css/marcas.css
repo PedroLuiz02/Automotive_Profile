@@ -78,6 +78,14 @@ header img{
     text-decoration: none;
 }
 
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0 50px;
+  gap: 3rem;
+}
+
 .card{
     background-color: #E8EAE6;
     width: 300px;
