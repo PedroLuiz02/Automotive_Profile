@@ -113,6 +113,10 @@ def abas_modelo(id,tipo):
     
         return render_template("partials/_avaliacao.html", modelos = modelos, avaliacoes = avaliacoes, contagem = contagem)
 
+@app.route("/api/modelo/<int:id>/<manutencao>")
+def api_manutencao(id, manutencao):
+    return 
+
 @app.route("/criar_tabelas")
 def criar_tabela():
     criar_tabelas()

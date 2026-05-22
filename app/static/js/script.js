@@ -164,6 +164,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("seta-dir").style.display = tabelaAtual === tabelas.length - 1 ? "none" : "block";
     }
 
+    let manutencaoAtual = null;
+
+    // Evento dos botões de manutenção
+    
+    // Ajax de troca de manutenção
+
     // Acordeon Estrelas
     function ativarStars() {
         const stars = document.querySelectorAll('.star');

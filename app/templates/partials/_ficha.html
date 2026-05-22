@@ -76,38 +76,52 @@
         </div>
         
         <dialog class="modal" id="modal-{{ ficha.id }}">
-            <button class="close-modal" data-modal="modal-{{ ficha.id }}">
-                <img src="{{ url_for('static', filename='img/close.png') }}">
-            </button>
+            <div class="close-btn">
+                <button class="close-modal" data-modal="modal-{{ ficha.id }}">
+                    <img src="{{ url_for('static', filename='img/close.png') }}">
+                </button>
+            </div>
         
             <div class="maintenance-content">
-                <div class="maintenance-cards">
-                    <button class="maintenance-card">
-                        <img src="{{ url_for('static', filename='img/auto_oil.png') }}">
-                        <h2>Troca de Óleo</h2>
-                    </button>
+                <div class="aside-menu">
+                    
+                    <div class="menu-title">
+                        <h2>Manutenções</h2>
+                    </div>
+                    
+                    <div class="menu-options">
+                        
+                        <div>
+                            <button class="maintenance-card">
+                                <img src="{{ url_for('static', filename='img/oil.png') }}">
+                                <h2>Troca de Fluidos</h2>
+                            </button>
+                        </div>
+    
+                        <div>
+                            <button class="maintenance-card">
+                                <img src="{{ url_for('static', filename='img/fluid.png') }}">
+                                <h2>Troca de Fluidos</h2>
+                            </button>
+                        </div>
+    
+                        <div>
+                            <button class="maintenance-card">
+                                <img src="{{ url_for('static', filename='img/brake.png') }}">
+                                <h2>Troca de Fluidos</h2>
+                            </button>
+                        </div>
+    
+                        <div>
+                            <button class="maintenance-card">
+                                <img src="{{ url_for('static', filename='img/battery.png') }}">
+                                <h2>Troca de Fluidos</h2>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="maintenance-cards">
-                    <button class="maintenance-card">
-                        <img src="{{ url_for('static', filename='img/auto_fluid.png') }}">
-                        <h2>Troca de Fluidos</h2>
-                    </button>
-                </div>
-
-                <div class="maintenance-cards">
-                    <button class="maintenance-card">
-                        <img src="{{ url_for('static', filename='img/auto_brake.png') }}">
-                        <h2>Sistema de Freios</h2>
-                    </button>
-                </div>
-
-                <div class="maintenance-cards">
-                    <button class="maintenance-card">
-                        <img src="{{ url_for('static', filename='img/auto_battery.png') }}">
-                        <h2>Checagem de Bateria</h2>
-                    </button>
-                </div>
+    
+                <div class="maintenance-infos" id="maintenance-info"></div>
             </div>
 
         </dialog>
