@@ -172,19 +172,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Acordeon Estrelas
     function ativarStars() {
+
         const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
+        const cards = document.querySelectorAll('.aval-card');
     
-                const ativo_star = star.classList.contains('ativo-star');
+        let filtroAtivo = null;
+    
+        stars.forEach(star => {
+    
+            star.addEventListener('click', () => {
+                const nota = star.dataset.nota;
+
+                if (filtroAtivo === nota) {
+    
+                    filtroAtivo = null;
+    
+                    stars.forEach(item => {
+                        item.classList.remove('ativo-star');
+                    });
+    
+                    cards.forEach(card => {
+                        card.style.display = "flex";
+                    });
+    
+                    return;
+                }
+    
+                filtroAtivo = nota;
     
                 stars.forEach(item => {
                     item.classList.remove('ativo-star');
                 });
     
-                if (!ativo_star) {
-                    star.classList.add('ativo-star');
-                }
+                star.classList.add('ativo-star');
+    
+                cards.forEach(card => {
+    
+                    if (card.dataset.nota === nota) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
             });
         });
     }

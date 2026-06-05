@@ -264,13 +264,7 @@ table, td {
     border-radius: 16px;
     position: relative;
     overflow: hidden;
-}
-
-.close-btn{
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 10;
+    padding: 20px;
 }
 
 .close-modal{
@@ -290,64 +284,103 @@ table, td {
     height: auto;
 }
 
-.aside-menu{
-    background-color: #C8C6C6;
-    width: 300px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+.menu-title{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .maintenance-content{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 5px 0 0;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    height: calc(100% - 80px);
+    grid-auto-flow: row;
+    align-content: center;
 }
 
-.menu-options{
+.left-options,
+.right-options{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 11px;
-    padding-top: 20px;
+    gap: 15px;
+    width: 100%;
 }
 
-.menu-title{
-    display: flex;
-    font-weight: bold;
-    text-align: start;
-    padding: 20px 0 0 18px;
+.column{
+    display: contents;
 }
 
 .maintenance-card{
-    width: 265px;
-    height: 100px;
+    background-color: #D9D9D9;
     border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    padding: 10px;
+    cursor: pointer;
     transition: transform 0.35s ease-in-out;
-    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 295px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.maintenance-card:hover{
-    transform: scale(1.005);
+.maintenance-card h2{
+    font-size: 2rem;
 }
 
-.maintenance-card img{
-    width: 64px;
-    height: auto;
+.maintenance-img{
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
+
+.card-title{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.card-title h3{
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.maintenance-items{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.maintenance-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.maintenance-row:last-child{
+    border-bottom: none;
+}
+
+.maintenance-item{
+    font-weight: 500;
+}
+
+.maintenance-interval{
+    color: #555;
+    text-align: right;
+    white-space: nowrap;
+}
+
 
 .aval-panel{
     width: 100%;
@@ -483,6 +516,22 @@ table, td {
     pointer-events: none;
 }
 
+.estrelas{
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+}
+
+.estrela-img{
+    width: 18px;
+    height: 18px;
+}
+
+.star.ativo-star{
+    background-color: #a7a7a7;
+    border: 2px solid #f7c948;
+}
+
 .quant_aval{
     max-height: 0;
     overflow: hidden;
@@ -567,63 +616,7 @@ table, td {
         font-size: 14px;
     }
 
-    .maintenance-content {
-        padding: 0 30px;
-        gap: 1.5rem;
-    }
-
-    .maintenance-cards {
-        width: 280px;
-        height: 240px;
-    }
-
-    .maintenance-card img {
-        width: 160px;
-    }
-
-    .aval-itens {
-        gap: 2rem;
-    }
-
-    .star {
-        margin-right: 8rem;
-        padding: 0.8rem;
-    }
-
-    .star img {
-        width: 40px;
-    }
-
-    .star h2 {
-        margin-left: 20px;
-        font-size: 1.2rem;
-    }
-
-    .aval-card {
-        width: 250px;
-        height: 200px;
-        font-size: 14px;
-        padding: 15px;
-    }
-
-    #aval-header {
-        font-size: 12px;
-    }
-
-    #aval-header img {
-        width: 36px;
-    }
-
-    .aval-cards {
-        gap: 1.5rem;
-    }
-
-    .pagination-card {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-
+    
     .modal {
         width: 1100px;
         height: 600px;
@@ -632,6 +625,115 @@ table, td {
     #modelo-img {
         max-height: 35vh;
         margin-bottom: 50px;
+    }
+
+    .maintenance-content{
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        height: calc(100% - 70px);
+        padding: 0;
+    }
+
+    .maintenance-card{
+        min-height: 245px;
+        padding: 10px;
+    }
+
+    .maintenance-img{
+        width: 36px;
+        height: 36px;
+    }
+
+    .card-title{
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+
+    .card-title h3{
+        font-size: 1.5rem;
+    }
+
+    .maintenance-items{
+        margin-top: 5px;
+    }
+
+    .maintenance-row{
+        padding: 6px 0;
+        font-size: 14px;
+    }
+
+    .maintenance-item{
+        font-size: 14px;
+    }
+
+    .maintenance-interval{
+        font-size: 13px;
+    }
+
+    #modelo-img {
+        max-height: 35vh;
+        margin-bottom: 50px;
+    }
+
+    .aval-itens {
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+    
+    .tabela-estrelas {
+        width: 240px;
+        flex-shrink: 0;
+    }
+    
+    .star {
+        margin-right: 0;
+        padding: 0.8rem;
+    }
+    
+    .star-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .stars-icon img {
+        width: 22px;
+    }
+    
+    .quant_aval {
+        font-size: 14px;
+    }
+    
+    .aval-panel {
+        flex: 1;
+    }
+    
+    .aval-cards {
+        gap: 1.2rem;
+    }
+    
+    .aval-card {
+        width: 240px;
+        height: 190px;
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    #aval-header {
+        font-size: 12px;
+    }
+    
+    #aval-header img {
+        width: 36px;
+    }
+    
+    .estrela-img {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .pagination-card {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
 }
 
@@ -681,93 +783,95 @@ table, td {
         font-size: 14px;
     }
 
-    .aval-content{
+    .aval-content {
         width: 100%;
         padding-bottom: 20px;
     }
-
-    .aval-itens{
+    
+    .aval-itens {
         flex-direction: column;
-        align-items: stretch;
-        gap: 1.2rem;
-        width: 100%;
-    }
-
-    .tabela-estrelas{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        gap: 10px;
-        width: 120px;
-    }
-
-    .star{
-        width: 100%;
-        padding: 12px;
-        margin: 0;
-        border-radius: 10px;
-    }
-
-    .star-header{
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .star-header h1{
-        font-size: 1.8rem;
-    }
-
-    .stars-icon img{
-        width: 20px;
-    }
-
-    .quant_aval{
-        font-size: 14px;
-    }
-
-    .aval-panel{
-        width: 100%;
+        align-items: center;
         gap: 1rem;
+        width: 100%;
     }
-
-    .aval-cards{
+    
+    .tabela-estrelas {
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .star {
+        width: 100%;
+        margin: 0;
+        padding: 12px;
+    }
+    
+    .star-header {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .star-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .stars-icon img {
+        width: 18px;
+    }
+    
+    .quant_aval {
+        font-size: 13px;
+    }
+    
+    .aval-panel {
+        width: 100%;
+    }
+    
+    .aval-cards {
+        display: flex;
+        flex-direction: column;
         gap: 12px;
         width: 100%;
     }
-
-    .aval-card{
+    
+    .aval-card {
         width: 100%;
-        min-height: 170px;
+        min-height: 160px;
         height: auto;
         border-radius: 18px;
         padding: 14px;
         font-size: 13px;
     }
-
-    #aval-header{
+    
+    #aval-header {
         font-size: 11px;
     }
-
-    #aval-header img{
-        width: 32px;
+    
+    #aval-header img {
+        width: 30px;
         margin-right: 8px;
     }
-
-    .estrelas{
+    
+    .estrelas {
+        gap: 2px;
+    }
+    
+    .estrela-img {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .pagination {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pagination-card {
+        width: 38px;
+        height: 38px;
         font-size: 14px;
-    }
-
-    .pagination{
-        margin-top: 5px;
-    }
-
-    .pagination-card{
-        width: 40px;
-        height: 40px;
-        font-size: 15px;
     }
 
     footer{
@@ -788,14 +892,70 @@ table, td {
         width: 100%;
         height: 100vh;
         border-radius: 0;
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    .menu-title{
+        margin-bottom: 20px;
+    }
+
+    .menu-title h2{
+        font-size: 1.5rem;
+    }
+
+    .close-modal img{
+        width: 24px;
     }
 
     .maintenance-content{
-        grid-template-columns: 1fr;
-        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        height: auto;
+        padding: 0;
     }
 
-    .maintenance-cards{
+    .maintenance-card{
+        width: 100%;
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .maintenance-img{
+        width: 32px;
+        height: 32px;
+    }
+
+    .card-title{
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .card-title h3{
+        font-size: 1.2rem;
+    }
+
+    .maintenance-items{
+        margin-top: 0;
+    }
+
+    .maintenance-row{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 8px 0;
+    }
+
+    .maintenance-item{
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .maintenance-interval{
+        font-size: 13px;
+        color: #666;
+        text-align: left;
         width: 100%;
     }
 }

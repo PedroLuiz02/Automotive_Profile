@@ -75,59 +75,39 @@ def criar_tabelas():
     """)
 
     cursor.execute("""
-    CREATE TABLE tipos_manutencao (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    descricao TEXT,
-    icone TEXT,
-    slug TEXT
+    CREATE TABLE IF NOT EXISTS tipos_manutencao (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        icone TEXT NOT NULL
     )
     """)
 
     cursor.execute("""
-    CREATE TABLE manutencao_modelo (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-    modelo_id INTEGER NOT NULL,
-    manutencao_id INTEGER NOT NULL,
-
-    intervalo_km TEXT,
-    intervalo_meses TEXT,
-
-    status TEXT,
-
-    custo_min REAL,
-    custo_max REAL,
-
-    FOREIGN KEY (modelo_id) REFERENCES modelos(id),
-    FOREIGN KEY (manutencao_id) REFERENCES tipos_manutencao(id)
-    );
-    """)
-    
-    cursor.execute("""
     CREATE TABLE manutencao_itens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-    manutencao_id INTEGER NOT NULL,
+    modelo_id INTEGER NOT NULL,
+    tipo_manutencao_id INTEGER NOT NULL,
 
-    tipo TEXT NOT NULL,
-    descricao TEXT NOT NULL,
+    item TEXT NOT NULL,
+    intervalo TEXT NOT NULL,
 
-    FOREIGN KEY (manutencao_id) REFERENCES tipos_manutencao(id)
+    FOREIGN KEY (modelo_id) REFERENCES modelos(id),
+    FOREIGN KEY (tipo_manutencao_id) REFERENCES tipos_manutencao(id)
     );
     """)
 
     cursor.execute("""
-    CREATE TABLE manutencao_especificacoes (
+    CREATE TABLE IF NOT EXISTS manutencao_itens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     manutencao_modelo_id INTEGER NOT NULL,
 
-    titulo TEXT NOT NULL,
-    valor TEXT NOT NULL,
+    item TEXT NOT NULL,
+    intervalo TEXT NOT NULL,
 
     FOREIGN KEY (manutencao_modelo_id) REFERENCES manutencao_modelo(id)
-    );
+    )
     """)
 
     conn.commit()
@@ -194,6 +174,47 @@ def inserir_avaliacoes(user, mensagem, nota, modelo_id):
 
     conn.commit()
     conn.close()
+    
+def inserir_tipo_manutencao(nome, icone):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO tipos_manutencao
+    (nome, icone)
+    VALUES (?, ?)
+    """, (nome, icone))
+
+    conn.commit()
+    conn.close()
+
+
+def inserir_manutencao_modelo(modelo_id, tipo_manutencao_id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO manutencao_modelo
+    (modelo_id, tipo_manutencao_id)
+    VALUES (?, ?)
+    """, (modelo_id, tipo_manutencao_id))
+
+    conn.commit()
+    conn.close()
+
+
+def inserir_item_manutencao(manutencao_modelo_id, item, intervalo):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO manutencao_itens
+    (manutencao_modelo_id, item, intervalo)
+    VALUES (?, ?, ?)
+    """, (manutencao_modelo_id, item, intervalo))
+
+    conn.commit()
+    conn.close()
 
 # Listar Dados
 def listar_carros():
@@ -250,30 +271,22 @@ def listar_modelos_por_carro(carro_id):
 # Listar Manual por Modelo
 
 # Listar Manutenções por Modelo
-def listar_manutencoes_por_modelo(modelo_id):
+def listar_tipos_manutencao_modelo(modelo_id):
     conn = conectar()
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT
-        manutencao_modelo.id,
-        tipos_manutencao.nome,
-        tipos_manutencao.descricao,
-        tipos_manutencao.icone,
+    SELECT DISTINCT
+        tm.id,
+        tm.nome,
+        tm.icone
 
-        manutencao_modelo.intervalo_km,
-        manutencao_modelo.intervalo_meses,
-        manutencao_modelo.status,
+    FROM manutencao_itens mi
 
-        manutencao_modelo.custo_min,
-        manutencao_modelo.custo_max
+    JOIN tipos_manutencao tm
+        ON tm.id = mi.tipo_manutencao_id
 
-    FROM manutencao_modelo
-
-    JOIN tipos_manutencao
-    ON manutencao_modelo.manutencao_id = tipos_manutencao.id
-
-    WHERE manutencao_modelo.modelo_id = ?
+    WHERE mi.modelo_id = ?
     """, (modelo_id,))
 
     dados = cursor.fetchall()
@@ -283,16 +296,20 @@ def listar_manutencoes_por_modelo(modelo_id):
     return dados
 
 # Listar Itens da Manutenção
-def listar_itens_manutencao(manutencao_id, tipo):
+def listar_itens_manutencao(modelo_id, tipo_manutencao_id):
     conn = conectar()
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT descricao
+    SELECT
+        item,
+        intervalo
+
     FROM manutencao_itens
-    WHERE manutencao_id = ?
-    AND tipo = ?
-    """, (manutencao_id, tipo))
+
+    WHERE modelo_id = ?
+    AND tipo_manutencao_id = ?
+    """, (modelo_id, tipo_manutencao_id))
 
     dados = cursor.fetchall()
 
@@ -300,22 +317,26 @@ def listar_itens_manutencao(manutencao_id, tipo):
 
     return dados
 
-# Listar Especificações
-def listar_especificacoes(manutencao_modelo_id):
-    conn = conectar()
-    cursor = conn.cursor()
+# Listar Manutenções com Itens
+def listar_manutencoes_com_itens(modelo_id):
 
-    cursor.execute("""
-    SELECT titulo, valor
-    FROM manutencao_especificacoes
-    WHERE manutencao_modelo_id = ?
-    """, (manutencao_modelo_id,))
+    tipos = listar_tipos_manutencao_modelo(modelo_id)
 
-    dados = cursor.fetchall()
+    resultado = []
 
-    conn.close()
+    for tipo in tipos:
 
-    return dados
+        resultado.append({
+            "id": tipo["id"],
+            "nome": tipo["nome"],
+            "icone": tipo["icone"],
+            "itens": listar_itens_manutencao(
+                modelo_id,
+                tipo["id"]
+            )
+        })
+
+    return resultado
 
 # Deletar
 def deletar_carro(id):

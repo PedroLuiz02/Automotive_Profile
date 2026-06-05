@@ -3,7 +3,7 @@
     <div class="aval-itens">
 
             <div id="tabela-estrelas" class="tabela-estrelas">
-                <div class="star">
+                <div class="star" data-nota="5">
                     <div class="star-header">
                         <h1>5</h1>
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="star">
+                <div class="star" data-nota="4">
                     <div class="star-header">
                         <h1>4</h1>
 
@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div class="star">
+                <div class="star" data-nota="3">
                     <div class="star-header">
                         <h1>3</h1>
 
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="star">
+                <div class="star" data-nota="2">
                     <div class="star-header">
                         <h1>2</h1>
 
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="star">
+                <div class="star" data-nota="1">
                     <div class="star-header">
                         <h1>1</h1>
 
@@ -97,21 +97,23 @@
             <div class="aval-panel">
                 <div class="aval-cards">
                     {% for avaliacao in avaliacoes %}
-                    <div class="aval-card">
+                    <div class="aval-card" data-nota="{{ avaliacao['nota'] }}">
                         <div id="aval-header">
                             <img src="{{ url_for('static', filename='img/perfil.png') }}">
                             <h2>{{ avaliacao["user"] }}</h2>
                         </div>
-    
+                    
                         <p>{{ avaliacao["mensagem"] }}</p>
     
-                        <div class="estrelas" data-nota="{{ avaliacao.nota }}">
+                        <div class="estrelas">
                             {% for i in range(1, 6) %}
-                            {% if i <= avaliacao["nota"] %}
-                                <span class="estrela cheia">★</span>
-                            {% else %}
-                                <span class="estrela vazia">☆</span>
-                            {% endif %}
+                                {% if i <= avaliacao["nota"] %}
+                                    <img class="estrela-img"
+                                         src="{{ url_for('static', filename='img/estrelaf.png') }}">
+                                {% else %}
+                                    <img class="estrela-img"
+                                         src="{{ url_for('static', filename='img/estrela.png') }}">
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>

@@ -76,52 +76,51 @@
         </div>
         
         <dialog class="modal" id="modal-{{ ficha.id }}">
-            <div class="close-btn">
+            <div class="menu-title">
+                <h2>Manutenções</h2>
                 <button class="close-modal" data-modal="modal-{{ ficha.id }}">
                     <img src="{{ url_for('static', filename='img/close.png') }}">
                 </button>
             </div>
         
             <div class="maintenance-content">
-                <div class="aside-menu">
                     
-                    <div class="menu-title">
-                        <h2>Manutenções</h2>
+                {% for manutencao in manutencoes %}
+
+                <div class="maintenance-card">
+                
+                    <div class="card-title">
+                
+                        <img
+                            src="{{ url_for('static', filename='img/' ~ manutencao.icone) }}"
+                            class="maintenance-img"
+                        >
+                
+                        <h3>{{ manutencao.nome }}</h3>
+                
                     </div>
+                
+                    <div class="maintenance-items">
+
+                        {% for item in manutencao.itens %}
                     
-                    <div class="menu-options">
-                        
-                        <div>
-                            <button class="maintenance-card">
-                                <img src="{{ url_for('static', filename='img/oil.png') }}">
-                                <h2>Troca de Fluidos</h2>
-                            </button>
+                        <div class="maintenance-row">
+                            <span class="maintenance-item">
+                                {{ item.item }}
+                            </span>
+                    
+                            <span class="maintenance-interval">
+                                {{ item.intervalo }}
+                            </span>
                         </div>
-    
-                        <div>
-                            <button class="maintenance-card">
-                                <img src="{{ url_for('static', filename='img/fluid.png') }}">
-                                <h2>Troca de Fluidos</h2>
-                            </button>
-                        </div>
-    
-                        <div>
-                            <button class="maintenance-card">
-                                <img src="{{ url_for('static', filename='img/brake.png') }}">
-                                <h2>Troca de Fluidos</h2>
-                            </button>
-                        </div>
-    
-                        <div>
-                            <button class="maintenance-card">
-                                <img src="{{ url_for('static', filename='img/battery.png') }}">
-                                <h2>Troca de Fluidos</h2>
-                            </button>
-                        </div>
+                    
+                        {% endfor %}
+                    
                     </div>
+                
                 </div>
-    
-                <div class="maintenance-infos" id="maintenance-info"></div>
+                
+                {% endfor %}
             </div>
 
         </dialog>

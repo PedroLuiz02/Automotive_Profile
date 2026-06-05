@@ -2,7 +2,7 @@ from . import app
 from .database import conectar
 import sqlite3
 from flask import render_template, jsonify, request, redirect, url_for, flash
-from .models import criar_tabelas, inserir_marcas, inserir_carros, inserir_modelos, inserir_fichas, listar_modelos_por_carro
+from .models import criar_tabelas, inserir_marcas, inserir_carros, inserir_modelos, inserir_fichas, listar_modelos_por_carro, listar_tipos_manutencao_modelo, listar_itens_manutencao, listar_manutencoes_com_itens
 from collections import Counter
 
 @app.route("/")
@@ -85,6 +85,7 @@ def abas_modelo(id,tipo):
         return render_template("partials/_geral.html", modelos = modelos) 
     
     elif tipo == "ficha":
+
         conn = conectar()
 
         fichas = conn.execute("""
@@ -96,7 +97,14 @@ def abas_modelo(id,tipo):
 
         conn.close()
 
-        return render_template("partials/_ficha.html", modelos=modelos, fichas=fichas)
+        manutencoes = listar_manutencoes_com_itens(id)
+
+        return render_template(
+            "partials/_ficha.html",
+            modelos=modelos,
+            fichas=fichas,
+            manutencoes=manutencoes
+        )
     
     elif tipo == "avaliacao":
         conn = conectar()
@@ -112,10 +120,6 @@ def abas_modelo(id,tipo):
         conn.close()
     
         return render_template("partials/_avaliacao.html", modelos = modelos, avaliacoes = avaliacoes, contagem = contagem)
-
-@app.route("/api/modelo/<int:id>/<manutencao>")
-def api_manutencao(id, manutencao):
-    return 
 
 @app.route("/criar_tabelas")
 def criar_tabela():
